@@ -70,6 +70,8 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 
 Inquiry form submissions are emailed to `binarybrain1509@gmail.com` through Gmail SMTP. Use a Gmail App Password for `MAIL_PASSWORD`; do not commit these values to the repository.
 
+For local development, copy `backend/.env.example` to `backend/.env`, replace the placeholder password, and run the backend normally. The local `.env` file is ignored by Git.
+
 Available REST Endpoints:
 - `GET  /api/health` - Backend status and health
 - `GET  /api/services` - List all services (filter with `?audience=STUDENT` or `?audience=BUSINESS`)
