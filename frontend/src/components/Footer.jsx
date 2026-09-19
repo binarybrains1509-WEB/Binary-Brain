@@ -1,0 +1,172 @@
+import React from 'react';
+import { ArrowUp } from 'lucide-react';
+
+// Crisp SVG social icons
+function LinkedInIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.4 9.74v-8.37H5.06v8.37h2.8Z"/>
+    </svg>
+  );
+}
+
+function InstagramIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+    </svg>
+  );
+}
+
+function GithubIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+  );
+}
+
+function YoutubeIcon({ className = "w-4 h-4" }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </svg>
+  );
+}
+
+export default function Footer({ onOpenQuote }) {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <footer className="bg-[#040711] border-t border-slate-900 text-slate-400 text-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-900">
+          
+          {/* Left: Brand Logo & Tagline */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <a href="#" className="flex items-center gap-3 group">
+              <div className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-blue-700 via-blue-500 to-cyan-400 p-[2px] shadow-md shadow-blue-500/20">
+                <div className="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 4V20M7 12C7 8.5 9.5 6 13 6C16.5 6 19 8.5 19 12C19 15.5 16.5 18 13 18C10.5 18 8.2 16.5 7.4 14" 
+                          stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="13" cy="12" r="1.5" fill="#ffffff" />
+                  </svg>
+                </div>
+              </div>
+              <div className="flex items-center tracking-tight text-xl font-extrabold leading-none">
+                <span className="text-white">Binary</span>
+                <span className="text-sky-400 ml-0.5">Brains</span>
+              </div>
+            </a>
+            <span className="text-xs font-medium text-slate-400 tracking-wide mt-2">
+              Build Today. A Brighter Tomorrow.
+            </span>
+          </div>
+
+          {/* Center: Quick Links */}
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm font-medium">
+            <a href="#" className="text-slate-300 hover:text-white transition-colors">
+              Home
+            </a>
+            <button onClick={() => scrollToSection('student-services')} className="text-slate-300 hover:text-purple-300 transition-colors">
+              Students
+            </button>
+            <button onClick={() => scrollToSection('business-services')} className="text-slate-300 hover:text-emerald-300 transition-colors">
+              Business
+            </button>
+            <button onClick={() => scrollToSection('recent-projects')} className="text-slate-300 hover:text-sky-300 transition-colors">
+              Projects
+            </button>
+            <button onClick={() => scrollToSection('why-us')} className="text-slate-300 hover:text-white transition-colors">
+              About
+            </button>
+            <button onClick={() => scrollToSection('cta-banner')} className="text-slate-300 hover:text-white transition-colors">
+              Contact
+            </button>
+          </div>
+
+          {/* Right: Social Media Icons matching mockup */}
+          <div className="flex items-center gap-3">
+            <a 
+              href="https://linkedin.com" 
+              target="_blank" 
+              rel="noreferrer"
+              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-blue-600 hover:border-blue-500 flex items-center justify-center transition-all shadow-sm"
+              aria-label="LinkedIn"
+            >
+              <LinkedInIcon className="w-4 h-4" />
+            </a>
+
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noreferrer"
+              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-pink-600 hover:border-pink-500 flex items-center justify-center transition-all shadow-sm"
+              aria-label="Instagram"
+            >
+              <InstagramIcon className="w-4 h-4" />
+            </a>
+
+            <a 
+              href="https://github.com" 
+              target="_blank" 
+              rel="noreferrer"
+              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 hover:border-slate-600 flex items-center justify-center transition-all shadow-sm"
+              aria-label="GitHub"
+            >
+              <GithubIcon className="w-4 h-4" />
+            </a>
+
+            <a 
+              href="https://youtube.com" 
+              target="_blank" 
+              rel="noreferrer"
+              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-red-600 hover:border-red-500 flex items-center justify-center transition-all shadow-sm"
+              aria-label="YouTube"
+            >
+              <YoutubeIcon className="w-4 h-4" />
+            </a>
+
+            {/* Back to top button */}
+            <button
+              onClick={scrollToTop}
+              className="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-sky-400 hover:bg-slate-800 flex items-center justify-center transition-all ml-2"
+              title="Back to Top"
+            >
+              <ArrowUp className="w-4 h-4" />
+            </button>
+          </div>
+
+        </div>
+
+        {/* Bottom copyright notice */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <div>
+            © 2026 BinaryBrains. All rights reserved.
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="hover:text-slate-400 transition-colors cursor-pointer">Privacy Policy</span>
+            <span>•</span>
+            <span className="hover:text-slate-400 transition-colors cursor-pointer">Terms of Service</span>
+            <span>•</span>
+            <span className="text-sky-400/80">React 19 + Spring Boot 3.4.2</span>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+  );
+}
