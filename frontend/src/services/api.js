@@ -40,33 +40,21 @@ export async function fetchStats() {
 }
 
 export async function submitInquiry(inquiryData) {
-  try {
-    const res = await fetch(`${BASE_URL}/inquiries`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(inquiryData)
-    });
-    if (!res.ok) {
-      const errBody = await res.json().catch(() => ({}));
-      throw new Error(errBody.message || `Submission failed with status ${res.status}`);
-    }
-    return await res.json();
-  } catch (err) {
-    console.warn("Using offline simulated submission:", err.message);
-    // Return simulated success response
-    return {
-      success: true,
-      message: "Thank you! Your inquiry has been received. Our BinaryBrains team will contact you within 24 hours.",
-      inquiry: {
-        id: "offline-" + Date.now(),
-        ...inquiryData,
-        createdAt: new Date().toISOString()
-      }
-    };
+  const res = await fetch(`${BASE_URL}/inquiries`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(inquiryData)
+  });
+
+  if (!res.ok) {
+    const errBody = await res.json().catch(() => ({}));
+    throw new Error(errBody.message || `Submission failed with status ${res.status}`);
   }
+
+  return await res.json();
 }
 
 export async function checkBackendHealth() {
