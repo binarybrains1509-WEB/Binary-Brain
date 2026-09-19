@@ -62,9 +62,13 @@ binarybrains/
 The backend runs on **port 8080**:
 ```powershell
 cd backend
+$env:MAIL_USERNAME = "binarybrain1509@gmail.com"
+$env:MAIL_PASSWORD = "your-gmail-app-password"
 $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 .\mvnw.cmd spring-boot:run
 ```
+
+Inquiry form submissions are emailed to `binarybrain1509@gmail.com` through Gmail SMTP. Use a Gmail App Password for `MAIL_PASSWORD`; do not commit these values to the repository.
 
 Available REST Endpoints:
 - `GET  /api/health` - Backend status and health

@@ -1,6 +1,9 @@
 package com.binarybrains.service;
 
 import com.binarybrains.model.Inquiry;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,8 +16,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class InquiryService {
 
     private final List<Inquiry> inquiries = new CopyOnWriteArrayList<>();
+    private final JavaMailSender mailSender;
+    private final String inquiryRecipient;
 
-    public InquiryService() {
+    public InquiryService(JavaMailSender mailSender,
+                          @Value("${binarybrains.inquiry-recipient}") String inquiryRecipient) {
+        this.mailSender = mailSender;
+        this.inquiryRecipient = inquiryRecipient;
+
         // Initial sample inquiries for demonstration
         Inquiry studentInq = new Inquiry(
                 UUID.randomUUID().toString(),
@@ -50,8 +59,33 @@ public class InquiryService {
         if (inquiry.getCreatedAt() == null) {
             inquiry.setCreatedAt(LocalDateTime.now());
         }
+        sendInquiryEmail(inquiry);
         inquiries.add(0, inquiry);
         return inquiry;
+    }
+
+    private void sendInquiryEmail(Inquiry inquiry) {
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo(inquiryRecipient);
+        mail.setReplyTo(inquiry.getEmail());
+        mail.setSubject("New BinaryBrains inquiry from " + inquiry.getName());
+        mail.setText(String.format(
+                "A new inquiry was submitted on the BinaryBrains website.%n%n" +
+                "Name: %s%nEmail: %s%nPhone: %s%nAudience: %s%n" +
+                "Service: %s%nBudget / Timeline: %s%n%nMessage:%n%s",
+                inquiry.getName(),
+                inquiry.getEmail(),
+                valueOrUnavailable(inquiry.getPhone()),
+                inquiry.getAudienceType(),
+                valueOrUnavailable(inquiry.getServiceNeeded()),
+                valueOrUnavailable(inquiry.getBudgetOrTimeline()),
+                valueOrUnavailable(inquiry.getMessage())
+        ));
+        mailSender.send(mail);
+    }
+
+    private String valueOrUnavailable(String value) {
+        return value == null || value.isBlank() ? "Not provided" : value;
     }
 
     public List<Inquiry> getAllInquiries() {
