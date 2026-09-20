@@ -39,6 +39,10 @@ export default function App() {
     setQuoteOpen(true);
   };
 
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050b17] text-slate-100">
       <div className="pointer-events-none fixed inset-0 z-20 overflow-hidden" aria-hidden="true">
@@ -59,7 +63,10 @@ export default function App() {
 
       <div className="bg-[#050b17]">
         <TechStrip />
-        <AudienceCards />
+        <AudienceCards
+          onStudentClick={() => scrollToSection('student-services')}
+          onBusinessClick={() => scrollToSection('business-services')}
+        />
         <StudentServices onSelectService={(service, audience) => openQuote(audience, service)} />
         <BusinessServices onSelectService={(service, audience) => openQuote(audience, service)} />
         <WhyBinaryBrains />
