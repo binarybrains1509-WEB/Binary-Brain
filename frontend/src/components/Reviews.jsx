@@ -44,7 +44,7 @@ function Stars({ rating, onSelect, interactive = false }) {
 
 export default function Reviews() {
   const [reviews, setReviews] = useState(starterReviews);
-  const [form, setForm] = useState({ name: '', role: '', rating: 5, review: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', role: '', rating: 5, review: '' });
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
   const [isFormOpen, setFormOpen] = useState(false);
@@ -53,6 +53,14 @@ export default function Reviews() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setStatus('Please enter a valid email address.');
+      return;
+    }
+    if (form.phone.replace(/\D/g, '').length < 10) {
+      setStatus('Please enter a valid mobile number with at least 10 digits.');
+      return;
+    }
     setLoading(true);
     setStatus('');
 
@@ -60,7 +68,8 @@ export default function Reviews() {
       await submitInquiry({
         submissionType: 'REVIEW',
         name: form.name,
-        email: 'review@binarybrains.local',
+        email: form.email,
+        phone: form.phone,
         role: form.role || 'Client',
         rating: `${form.rating}/5`,
         review: form.review,
@@ -71,7 +80,7 @@ export default function Reviews() {
         role: form.role || 'Client',
         image: form.role.toLowerCase().includes('business') ? businessImage : studentImage,
       }, ...current]);
-      setForm({ name: '', role: '', rating: 5, review: '' });
+      setForm({ name: '', email: '', phone: '', role: '', rating: 5, review: '' });
       setFormOpen(false);
       setStatus('Thank you for sharing your review.');
     } catch (error) {
@@ -130,6 +139,8 @@ export default function Reviews() {
             </div>
             <div className="space-y-4">
               <input required value={form.name} onChange={(event) => updateField('name', event.target.value)} placeholder="Your name" className="w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/60" />
+              <input required type="email" maxLength={120} value={form.email} onChange={(event) => updateField('email', event.target.value)} placeholder="Your email address" className="w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/60" />
+              <input required type="tel" pattern="[+0-9 ()-]{10,20}" maxLength={20} value={form.phone} onChange={(event) => updateField('phone', event.target.value)} placeholder="Mobile number" className="w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/60" />
               <input value={form.role} onChange={(event) => updateField('role', event.target.value)} placeholder="Student, Founder, Client..." className="w-full rounded-xl border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white outline-none placeholder:text-slate-500 focus:border-cyan-300/60" />
               <div>
                 <p className="mb-2 text-xs font-semibold text-slate-300">Your rating</p>

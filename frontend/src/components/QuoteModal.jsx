@@ -45,6 +45,14 @@ export default function QuoteModal({ isOpen, onClose, initialAudience = 'GENERAL
       setError('Please provide your name and email address.');
       return;
     }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+    if (formData.phone.trim() && formData.phone.replace(/\D/g, '').length < 10) {
+      setError('Please enter a valid mobile number with at least 10 digits.');
+      return;
+    }
 
     setLoading(true);
     setError('');
@@ -206,6 +214,7 @@ export default function QuoteModal({ isOpen, onClose, initialAudience = 'GENERAL
                   <input
                     type="email"
                     required
+                    maxLength={120}
                     placeholder="name@domain.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -221,6 +230,8 @@ export default function QuoteModal({ isOpen, onClose, initialAudience = 'GENERAL
                   </label>
                   <input
                     type="tel"
+                    pattern="[+0-9 ()-]{10,20}"
+                    maxLength={20}
                     placeholder="+91 98765 43210"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
