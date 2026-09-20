@@ -68,7 +68,7 @@ $env:JAVA_HOME = "C:\Program Files\Java\jdk-21"
 .\mvnw.cmd spring-boot:run
 ```
 
-Inquiry form submissions are emailed to `binarybrain1509@gmail.com` through Gmail SMTP. Use a Gmail App Password for `MAIL_PASSWORD`; do not commit these values to the repository.
+Inquiry form submissions are emailed to `binarybrain1509@gmail.com` through Gmail SMTP. Enable 2-Step Verification on that Gmail account, create a Gmail App Password, and use the 16-character App Password for `MAIL_PASSWORD`; a normal Gmail password will not work. Do not commit these values to the repository.
 
 For local development, copy `backend/.env.example` to `backend/.env`, replace the placeholder password, and run the backend normally. The local `.env` file is ignored by Git.
 

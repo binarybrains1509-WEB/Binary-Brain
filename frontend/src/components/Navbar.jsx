@@ -16,6 +16,7 @@ const navLinks = [
   { label: "Students", href: "#students", hasMenu: true },
   { label: "Business", href: "#business", hasMenu: true },
   { label: "Projects", href: "#recent-projects" },
+  { label: "Reviews", href: "#reviews" },
   { label: "About", href: "#why-us" },
   { label: "Contact", href: "#contact" },
 ];

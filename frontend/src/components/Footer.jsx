@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
+import logoIcon from '../assets/logo-icon.jpeg';
 
 // Crisp SVG social icons
 function InstagramIcon({ className = "w-4 h-4" }) {
@@ -41,14 +42,13 @@ export default function Footer({ onOpenQuote }) {
           {/* Left: Brand Logo & Tagline */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <a href="#" className="flex items-center gap-3 group">
-              <div className="relative w-9 h-9 rounded-full bg-gradient-to-tr from-blue-700 via-blue-500 to-cyan-400 p-[2px] shadow-md shadow-blue-500/20">
-                <div className="w-full h-full bg-slate-950 rounded-full flex items-center justify-center">
-                  <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 4V20M7 12C7 8.5 9.5 6 13 6C16.5 6 19 8.5 19 12C19 15.5 16.5 18 13 18C10.5 18 8.2 16.5 7.4 14" 
-                          stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="13" cy="12" r="1.5" fill="#ffffff" />
-                  </svg>
-                </div>
+              <div className="relative flex h-10 w-10 items-center justify-center">
+                <div className="absolute inset-0 rounded-xl bg-cyan-400/10 blur-xl transition duration-300 group-hover:bg-cyan-400/25" />
+                <img
+                  src={logoIcon}
+                  alt="BinaryBrains logo"
+                  className="relative h-9 w-9 object-contain transition-transform duration-300 group-hover:scale-105"
+                />
               </div>
               <div className="flex items-center tracking-tight text-xl font-extrabold leading-none">
                 <span className="text-white">Binary</span>
@@ -74,10 +74,13 @@ export default function Footer({ onOpenQuote }) {
             <button onClick={() => scrollToSection('recent-projects')} className="text-slate-300 hover:text-sky-300 transition-colors">
               Projects
             </button>
+            <button onClick={() => scrollToSection('reviews')} className="text-slate-300 hover:text-amber-300 transition-colors">
+              Reviews
+            </button>
             <button onClick={() => scrollToSection('why-us')} className="text-slate-300 hover:text-white transition-colors">
               About
             </button>
-            <button onClick={() => scrollToSection('cta-banner')} className="text-slate-300 hover:text-white transition-colors">
+            <button onClick={onOpenQuote} className="text-slate-300 hover:text-white transition-colors">
               Contact
             </button>
           </div>

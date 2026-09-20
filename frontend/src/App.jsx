@@ -12,6 +12,7 @@ import CtaBanner from './components/CtaBanner';
 import Footer from './components/Footer';
 import QuoteModal from './components/QuoteModal';
 import VideoModal from './components/VideoModal';
+import Reviews from './components/Reviews';
 
 const matrixWords = [
   ['01', '8%', '-2s', '13s'], ['const', '16%', '-7s', '18s'], ['<>/', '25%', '-11s', '16s'],
@@ -64,9 +65,10 @@ export default function App() {
         <WhyBinaryBrains />
         <StatsBar />
         <RecentProjects />
+        <Reviews />
         <CtaBanner onOpenQuote={() => openQuote()} />
       </div>
-        <Footer />
+        <Footer onOpenQuote={() => openQuote()} />
       </div>
 
       <QuoteModal

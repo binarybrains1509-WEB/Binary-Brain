@@ -1,6 +1,7 @@
 import { studentServices, businessServices, recentProjects, statistics } from '../data/mockData';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT;
 
 export async function fetchServices(audience = null) {
   try {
@@ -40,7 +41,11 @@ export async function fetchStats() {
 }
 
 export async function submitInquiry(inquiryData) {
-  const res = await fetch(`${BASE_URL}/inquiries`, {
+  if (!FORMSPREE_ENDPOINT) {
+    throw new Error('Form submission is not configured yet. Add VITE_FORMSPREE_ENDPOINT to frontend/.env.local.');
+  }
+
+  const res = await fetch(FORMSPREE_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -54,7 +59,10 @@ export async function submitInquiry(inquiryData) {
     throw new Error(errBody.message || `Submission failed with status ${res.status}`);
   }
 
-  return await res.json();
+  return {
+    success: true,
+    message: 'Thank you! Your inquiry has been received.'
+  };
 }
 
 export async function checkBackendHealth() {
