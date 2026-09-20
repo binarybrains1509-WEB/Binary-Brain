@@ -70,7 +70,16 @@ export default function Hero({ onOpenQuote }) {
     const video = videoRef.current;
     if (!video) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { video.pause(); video.currentTime = 4.5; }
+    if (reduce) {
+      video.pause();
+      video.currentTime = 4.5;
+      video.style.opacity = "0.72";
+      return;
+    }
+
+    video.play().catch(() => {
+      video.style.opacity = "0.72";
+    });
   }, []);
 
   // Fade in at the start and out at the end so the loop never "jumps"
@@ -107,7 +116,7 @@ export default function Hero({ onOpenQuote }) {
       `}</style>
 
       {/* ===== CENTER VIDEO (the glowing circle) ===== */}
-      <div className="bb-video-glow absolute inset-0 -z-20">
+      <div className="bb-video-glow pointer-events-none absolute inset-0 z-0">
         <video
           ref={videoRef}
           src={heroVideo}
@@ -118,8 +127,8 @@ export default function Hero({ onOpenQuote }) {
           preload="auto"
           aria-hidden="true"
           onTimeUpdate={handleTimeUpdate}
-          style={{ opacity: 0 }}
-          className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-[1.12] object-cover object-center mix-blend-screen max-md:scale-[1.6]"
+          style={{ opacity: 0.72 }}
+          className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-[1.12] object-cover object-center mix-blend-screen max-md:scale-[1.25]"
         />
       </div>
 
