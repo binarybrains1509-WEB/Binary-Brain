@@ -45,7 +45,8 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050b17] text-slate-100">
-      <div className="pointer-events-none fixed inset-0 z-20 overflow-hidden" aria-hidden="true">
+      {/* Matrix background animation - desktop only, disabled on mobile for performance */}
+      <div className="pointer-events-none fixed inset-0 z-20 hidden overflow-hidden sm:block" aria-hidden="true">
         {matrixWords.map(([word, left, delay, duration]) => (
           <span key={`${word}-${left}`} className="matrix-word" style={{ left, animationDelay: delay, animationDuration: duration }}>
             {word}
