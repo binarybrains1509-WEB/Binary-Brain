@@ -196,9 +196,9 @@ export default function Navbar({ onOpenQuote }) {
     <header
       ref={navRef}
       className={`fixed inset-x-0 top-0 z-50 text-white transition-all duration-500 ${
-        scrolled
-          ? "border-b border-white/[0.08] bg-[#071225]/90 shadow-lg backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
+        scrolled || mobileOpen
+  ? "border-b border-white/[0.08] bg-[#071225]/95 shadow-lg backdrop-blur-xl"
+  : "border-b border-transparent bg-transparent"
       }`}
     >
       {/* ========================================
@@ -412,7 +412,7 @@ export default function Navbar({ onOpenQuote }) {
         ======================================== */}
 
         {mobileOpen && (
-          <div className="border-t border-white/10 bg-transparent py-5 lg:hidden">
+          <div className="max-h-[calc(100vh-80px)] overflow-y-auto border-t border-white/10 bg-[#071225] py-5 lg:hidden">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => {
                 if (link.hasMenu) {

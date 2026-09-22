@@ -124,7 +124,7 @@ export default function Hero({ onOpenQuote }) {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           aria-hidden="true"
           onTimeUpdate={handleTimeUpdate}
           style={{ opacity: 0.72 }}
