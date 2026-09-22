@@ -104,7 +104,7 @@ export default function Hero({ onOpenQuote }) {
       id="home"
       className="relative isolate flex min-h-screen items-center justify-center overflow-hidden bg-[#02060f] font-sans text-white"
     >
-      {/* Slow "breathing" glow animations */}
+      {/* Slow "breathing" glow animations - disabled on mobile for performance */}
       <style>{`
         @keyframes bbBreathe { 0%,100% { opacity:.55; transform:translate(-50%,-50%) scale(.92);} 50% { opacity:1; transform:translate(-50%,-50%) scale(1.08);} }
         @keyframes bbVideoGlow { 0%,100% { filter:brightness(.9) saturate(1.05) blur(0px);} 50% { filter:brightness(1.35) saturate(1.3) blur(.4px);} }
@@ -113,6 +113,12 @@ export default function Hero({ onOpenQuote }) {
         .bb-video-glow { animation: bbVideoGlow 8s ease-in-out infinite; }
         .bb-text-glow { animation: bbTextGlow 8s ease-in-out infinite; }
         @media (prefers-reduced-motion: reduce) { .bb-breathe,.bb-video-glow,.bb-text-glow { animation:none; } }
+
+        /* Mobile performance: kill GPU-heavy animated filters/blend modes */
+        @media (max-width: 768px) {
+          .bb-video-glow { animation: none !important; filter: none !important; }
+          .bb-breathe { animation: none !important; }
+        }
       `}</style>
 
       {/* ===== CENTER VIDEO (the glowing circle) ===== */}
@@ -128,7 +134,7 @@ export default function Hero({ onOpenQuote }) {
           aria-hidden="true"
           onTimeUpdate={handleTimeUpdate}
           style={{ opacity: 0.72 }}
-          className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-[1.12] object-cover object-center mix-blend-screen max-md:scale-[1.25]"
+          className="absolute left-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-[1.12] object-cover object-center sm:mix-blend-screen max-md:scale-[1.25]"
         />
       </div>
 
@@ -143,9 +149,9 @@ export default function Hero({ onOpenQuote }) {
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#02060f] to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-t from-[#02060f] to-transparent" />
 
-      {/* Fine film grain / dust for depth */}
+      {/* Fine film grain / dust for depth - desktop only, feTurbulence is very GPU-heavy on mobile */}
       <div
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] mix-blend-overlay"
+        className="pointer-events-none absolute inset-0 -z-10 hidden opacity-[0.05] mix-blend-overlay sm:block"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
@@ -156,7 +162,7 @@ export default function Hero({ onOpenQuote }) {
       <div className="relative z-10 mx-auto flex w-[calc(100%-32px)] max-w-[980px] flex-col items-center px-2 py-28 text-center sm:w-[calc(100%-56px)] lg:py-24">
 
         {/* Eyebrow */}
-        <div className="mb-8 inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/[0.04] px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-white/80 backdrop-blur-md sm:text-[11px]">
+        <div className="mb-8 inline-flex items-center gap-4 rounded-full border border-white/10 bg-white/[0.08] px-5 py-2 text-[10px] font-semibold uppercase tracking-[0.34em] text-white/80 sm:bg-white/[0.04] sm:backdrop-blur-md sm:text-[11px]">
           <span>Design</span>
           <span className="h-1 w-1 rounded-full bg-[#8758ff]" />
           <span>Develop</span>
@@ -181,7 +187,7 @@ export default function Hero({ onOpenQuote }) {
         </h1>
 
         {/* Terminal description (compact glass) */}
-        <div className="mt-10 w-full max-w-[600px] overflow-hidden rounded-2xl border border-white/10 bg-[#050a18]/60 text-left font-mono shadow-[0_0_60px_rgba(135,88,255,0.22)] backdrop-blur-2xl">
+        <div className="mt-10 w-full max-w-[600px] overflow-hidden rounded-2xl border border-white/10 bg-[#050a18]/80 text-left font-mono shadow-[0_0_60px_rgba(135,88,255,0.22)] sm:bg-[#050a18]/60 sm:backdrop-blur-2xl">
           <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5 text-[10px] text-slate-400 sm:px-5">
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-red-400/80" />
@@ -212,7 +218,7 @@ export default function Hero({ onOpenQuote }) {
           <button
             type="button"
             onClick={() => scrollToSection("recent-projects")}
-            className="hero-button-float-delayed group inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/[0.05] px-8 py-4 text-[14px] font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:border-white/60 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#28adff]"
+            className="hero-button-float-delayed group inline-flex items-center gap-3 rounded-full border border-white/25 bg-white/[0.08] px-8 py-4 text-[14px] font-semibold text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10 sm:bg-white/[0.05] sm:backdrop-blur-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#28adff]"
           >
             Our Projects
             <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
